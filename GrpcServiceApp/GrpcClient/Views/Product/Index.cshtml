@@ -1,0 +1,53 @@
+﻿@model GrpcServiceApp.Products
+
+<div class="conatainer p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary">Product List</h1>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Mã
+                </th>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Giá
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                 <th>
+                    Ngày tạo
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model.Items)
+            {
+                <tr>
+                    <td width="5%">
+                        @obj.Id
+                    </td>
+                    <td width="20%">
+                        @obj.Name
+                    </td>
+                    <td width="15%">
+                        @obj.Price
+                    </td>
+                    <td width="15%">
+                        @obj.Stock
+                    </td>
+                    <td width="15%">
+                        @obj.DateCreated
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
