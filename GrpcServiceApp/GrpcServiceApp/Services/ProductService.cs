@@ -1,5 +1,6 @@
 ﻿using Grpc.Core;
 using GrpcServiceApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GrpcServiceApp.Services
 {
@@ -43,6 +44,60 @@ namespace GrpcServiceApp.Services
                 Color = requestData.Color,
                 Size = requestData.Size,
                 DateCreated = requestData.DateCreated.ToDateTime()
+            });
+            _db.SaveChanges();
+            return Task.FromResult(new Empty());
+        }
+
+        public override Task<Empty> Update(Product requestData, ServerCallContext context)
+        {
+            _db.Products.Update(new Data.Product()
+            {
+                Id = requestData.Id,
+                Name = requestData.Name,
+                Price = requestData.Price,
+                Stock = requestData.Stock,
+                Description = requestData.Description,
+                Color = requestData.Color,
+                Size = requestData.Size,
+                DateCreated = requestData.DateCreated.ToDateTime()
+            });
+            _db.SaveChanges();
+            return Task.FromResult(new Empty());
+        }
+
+        public override Task<Product> GetById(ProductFilter requestData, ServerCallContext context)
+        {
+            var data = _db.Products.Find(requestData.Id);
+            Product emp = new Product()
+            {
+                Id = data.Id,
+                Name = data.Name,
+                Price = data.Price,
+                Stock = data.Stock,
+                Description = data.Description,
+                Color = data.Color,
+                Size = data.Size,
+                DateCreated = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(data.DateCreated, DateTimeKind.Utc))
+            };
+            return Task.FromResult(emp);
+        }
+
+        public override Task<Empty> Delete(ProductFilter requestData, ServerCallContext context)
+        {
+            var data = _db.Products.Find(requestData.Id);
+            _db.Entry(data).State = EntityState.Detached;
+    
+            _db.Products.Remove(new Data.Product()
+            {
+                Id = data.Id,
+                Name = data.Name,
+                Price = data.Price,
+                Stock = data.Stock,
+                Description = data.Description,
+                Color = data.Color,
+                Size = data.Size,
+                DateCreated = data.DateCreated
             });
             _db.SaveChanges();
             return Task.FromResult(new Empty());
