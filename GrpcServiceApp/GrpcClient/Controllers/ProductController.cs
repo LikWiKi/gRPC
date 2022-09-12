@@ -38,7 +38,7 @@ namespace GrpcClient.Controllers
             });
             return RedirectToAction("Index");
         }
-
+   
         [HttpGet]
         public IActionResult Edit(string id)
         {
