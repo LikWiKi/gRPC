@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceApp";
+
+import "google/protobuf/timestamp.proto";
+
+package ProductgRPC;
+
+service ProductCRUD{
+	rpc GetAll(Empty) returns (Products);
+	rpc GetById(ProductFilter) returns (Product);
+	rpc Create(Product) returns (Empty);
+	rpc Update(Product) returns (Empty);
+	rpc Delete(ProductFilter) returns (Empty);
+}
+
+message Empty{}
+
+message Product{
+	int32 id = 1;
+	string name = 2;
+	float price = 3;
+	int32 stock = 4;
+	string description = 5;
+	int32 color = 6;
+	int32 size = 7;
+	google.protobuf.Timestamp dateCreated = 8;
+}
+
+message Products{
+	repeated Product items = 1;
+}
+
+message ProductFilter{
+	int32 id = 1;
+}
