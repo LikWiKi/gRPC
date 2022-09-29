@@ -1,3 +1,9 @@
+## Overview
+1. Connect db bằng EF Core, gRPC
+2. Dựng UI: Table cha => Detail table con => Detail table cháu
+3. Binding data lên view (ReactJS, WPF, Winform, MVC)
+4. CRUD (Transaction)
+
 ## Create DB
 <pre>create table Category (
 Id int IDENTITY(1,1) PRIMARY KEY,
@@ -32,12 +38,6 @@ UpdatedDate Datetime Not null,
 FOREIGN KEY (ProductId) REFERENCES Product(Id)
 );
 </pre>
-
-## Overview
-1. Connect db bằng EF Core, gRPC
-2. Dựng UI: Table cha => Detail table con => Detail table cháu
-3. Binding data lên view (ReactJS, WPF, Winform, MVC)
-4. CRUD (Transaction)
 
 ## Database
 URL: NTQTRAINING.mssql.somee.com
