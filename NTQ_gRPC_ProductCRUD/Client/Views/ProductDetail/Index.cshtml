@@ -1,0 +1,86 @@
+﻿@model Service.ProductDetails
+
+<div class="conatainer p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary">Product Detail List</h1>
+        </div>
+        <div class="text-end" style="margin-bottom: -50px">
+            <a asp-controller="ProductDetail" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Color
+                </th>
+                <th>
+                    StartingDate
+                </th>
+                <th>
+                    ClosingDate
+                </th>
+                <th>
+                    MadeBy
+                </th>
+                <th>
+                    ProductId
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+                <th>
+                    UpdatedDate
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @obj.Id
+                    </td>
+                    <td>
+                        @obj.Price
+                    </td>
+                    <td>
+                        @obj.Color
+                    </td>
+                    <td>
+                        @obj.StartingDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @obj.ClosingDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                     <td>
+                        @obj.MadeBy
+                    </td>
+                     <td>
+                        @obj.ProductId
+                    </td>
+                    <td>
+                        @obj.CreatedDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @obj.UpdatedDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        <a asp-controller="ProductDetail" asp-action="Edit" class="btn btn-primary" asp-route-id="@obj.Id">Edit</a>
+                        <a asp-controller="ProductDetail" asp-action="Delete" class="btn btn-primary" asp-route-id="@obj.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

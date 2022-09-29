@@ -1,0 +1,61 @@
+﻿@using Service
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Name</label>
+                <input name="name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tag Name</label>
+                <input name="tagName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Active</label>
+                <select name="active" id="checkActive">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Category Id</label>
+                <select name="categoryId">
+                    @foreach (var item in (IEnumerable<Category>)ViewData["Categories"])
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Create Date</label>
+                <input name="createDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Update Date</label>
+                <input name="updateDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

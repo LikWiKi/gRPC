@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+option csharp_namespace = "Service";
+
+import "google/protobuf/timestamp.proto";
+
+package storeCRUD;
+
+//CATEGORY
+service CategoryCRUD{
+	rpc GetAll(Empty) returns (Categories);
+	rpc GetById(CategoryById) returns (Category);
+	rpc Create(Category) returns (Empty);
+	rpc Update(Category) returns (Empty);
+	rpc Delete(CategoryById) returns (Empty);
+	rpc GetAllProductByCategoryId(CategoryById) returns (Products);
+}
+
+message Empty{}
+
+message Category{
+	int32 id = 1;
+	string name = 2;
+	string tagName = 3;
+	bool active = 4;
+	google.protobuf.Timestamp CreatedDate = 5;
+	google.protobuf.Timestamp UpdatedDate = 6;
+}
+
+message Categories{
+	repeated Category items = 1;
+}
+
+message CategoryById{
+	int32 id = 1;
+}
+
+//PRODUCT
+service ProductCRUD{
+	rpc GetAll(Empty) returns (Products);
+	rpc GetById(ProductById) returns (Product);
+	rpc Create(Product) returns (Empty);
+	rpc Update(Product) returns (Empty);
+	rpc Delete(ProductById) returns (Empty);
+}
+
+message Product{
+	int32 id = 1;
+	string name = 2;
+	string tagName = 3;
+	bool active = 4;
+	int32 categoryId = 5;
+	google.protobuf.Timestamp CreatedDate = 6;
+	google.protobuf.Timestamp UpdatedDate = 7;
+}
+
+message Products{
+	repeated Product items = 1;
+}
+
+message ProductById{
+	int32 id = 1;
+}
+
+//PRODUCT DETAIL
+service ProductDetailCRUD{
+	rpc GetAll(Empty) returns (ProductDetails);
+	rpc GetById(ProductDetailById) returns (ProductDetail);
+	rpc Create(ProductDetail) returns (Empty);
+	rpc Update(ProductDetail) returns (Empty);
+	rpc Delete(ProductDetailById) returns (Empty);
+}
+
+message ProductDetail{
+	int32 id = 1;
+	string price = 2;
+	string color = 3;
+	google.protobuf.Timestamp StartingDate = 4;
+	google.protobuf.Timestamp ClosingDate = 5;
+	string madeBy = 6;
+	int32 productId = 7;
+	google.protobuf.Timestamp CreatedDate = 8;
+	google.protobuf.Timestamp UpdatedDate = 9;
+}
+
+message ProductDetails{
+	repeated ProductDetail items = 1;
+}
+
+message ProductDetailById{
+	int32 id = 1;
+}
+
