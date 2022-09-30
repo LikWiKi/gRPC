@@ -10,11 +10,11 @@ namespace Client.Controllers
         {
             var channel = GrpcChannel.ForAddress("https://localhost:7092");
             var clientProduct = new ProductCRUD.ProductCRUDClient(channel);
-            //var clientCategory = new CategoryCRUD.CategoryCRUDClient(channel);
+            var clientCategory = new CategoryCRUD.CategoryCRUDClient(channel);
 
             var products = clientProduct.GetAll(new Empty());
-            //var listOfCategory = clientCategory.GetAll(new Empty()).Items;
-            //ViewData["DisplayCategory"] = listOfCategory;
+            var listOfCategory = clientCategory.GetAll(new Empty()).Items;
+            ViewData["DisplayCategory"] = listOfCategory;
             return View(products);
         }
 
@@ -90,6 +90,34 @@ namespace Client.Controllers
 ;
             client.Delete(product);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Detail(string id)
+        {
+            var channel = GrpcChannel.ForAddress("https://localhost:7092");
+            var clientProductDetail = new ProductDetailCRUD.ProductDetailCRUDClient(channel);
+            var clientProduct = new ProductCRUD.ProductCRUDClient(channel);
+
+            ViewData["ListOfProduct"] = clientProduct.GetAll(new Empty()).Items;
+            ViewData["ProductId"] = int.Parse(id);
+
+            var findById= new ProductDetailById();
+            //findById.Id = Convert.ToInt32(id);
+
+            var listOfProductDetail = clientProductDetail.GetAll(new Empty()).Items;
+            foreach(var item in listOfProductDetail)
+            {
+                if(item.ProductId == int.Parse(id))
+                {
+                    findById.Id = item.Id;
+                }
+            }
+            var productDetail = clientProductDetail.GetById(findById);
+            if (productDetail == null)
+                return NotFound();
+
+            return View(productDetail);
         }
     }
 }

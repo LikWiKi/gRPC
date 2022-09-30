@@ -9,14 +9,6 @@ namespace Service.Services
 {
     public class CategoryService : CategoryCRUD.CategoryCRUDBase
     {
-        //private readonly NTQTRAININGContext _dbContext;
-        //private readonly ICategoryRepository _categoryRepository;
-        //public CategoryService(NTQTRAININGContext dbContext, ICategoryRepository categoryRepository)
-        //{
-        //    _dbContext = dbContext;
-        //    _categoryRepository = categoryRepository;
-        //}
-
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
         public CategoryService(ICategoryRepository categoryRepository, IProductRepository productRepository)

@@ -22,8 +22,19 @@ namespace Service.Repository
 
         public void Delete(int id)
         {
-            _dbSet.Remove(_dbSet.Find(id));
-            _context.SaveChanges();
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _dbSet.Remove(_dbSet.Find(id));
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
         public IQueryable<T> GetAll()

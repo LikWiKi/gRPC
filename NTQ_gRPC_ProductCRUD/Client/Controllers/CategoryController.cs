@@ -82,6 +82,11 @@ namespace Client.Controllers
             var category = new CategoryById();
             category.Id = Convert.ToInt32(id);
             var listOfProduct = client.GetAllProductByCategoryId(category);
+
+            var listOfCategory = client.GetAll(new Empty()).Items;
+            ViewData["Categories"] = listOfCategory;
+            ViewData["CategoryId"] = int.Parse(id);
+
             return View(listOfProduct);
         }
     }

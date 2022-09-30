@@ -33,14 +33,50 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
+            @{
+                string createdYear = @Model.CreatedDate.ToDateTime().Year.ToString();
+                string createdMonth = @Model.CreatedDate.ToDateTime().Month.ToString();
+                if (@Model.CreatedDate.ToDateTime().Month <= 9)
+                {
+                    createdMonth = "0" + createdMonth;
+                }
+                string createdDay = @Model.CreatedDate.ToDateTime().Day.ToString();
+                if (@Model.CreatedDate.ToDateTime().Day <= 9)
+                {
+                    createdDay = "0" + createdDay;
+                }
+                string val = createdYear + "-" + createdMonth + "-" + createdDay;
+
+                <div class="form-group">
+                    <label class="control-label">CreatedDate</label>
+                    <input type="date" asp-for="CreatedDate" name="dobCreate" class="form-control" value="@val" />
+                </div>
+
+                string updatedYear = @Model.UpdatedDate.ToDateTime().Year.ToString();
+                string updatedMonth = @Model.UpdatedDate.ToDateTime().Month.ToString();
+                if (@Model.UpdatedDate.ToDateTime().Month <= 9)
+                {
+                    updatedMonth = "0" + updatedMonth;
+                }
+                string updatedDay = @Model.UpdatedDate.ToDateTime().Day.ToString();
+                if (@Model.UpdatedDate.ToDateTime().Day <= 9)
+                {
+                    updatedDay = "0" + updatedDay;
+                }
+                string updatedVal = updatedYear + "-" + updatedMonth + "-" + updatedDay;
+                <div class="form-group">
+                    <label class="control-label">UpdatedDate</label>
+                    <input type="date" asp-for="UpdatedDate" name="dobUpdate" class="form-control" value="@updatedVal" />
+                </div>
+            }
+            @*<div class="form-group">
                 <label class="control-label">Create Date</label>
                 <input asp-for="CreatedDate" type="date" name="dobCreate" value="dobCreate" class="form-control" />
             </div>
             <div class="form-group">
                 <label class="control-label">Update Date</label>
                 <input asp-for="UpdatedDate" type="date" name="dobUpdate" value="dobUpdate" class="form-control" />
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Edit" class="btn btn-primary" />
             </div>

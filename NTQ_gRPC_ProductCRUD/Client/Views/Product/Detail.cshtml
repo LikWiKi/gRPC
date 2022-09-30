@@ -1,0 +1,42 @@
+﻿@using Service
+@model Service.ProductDetail
+
+<div class="conatainer p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary">
+                @foreach (var item in (IEnumerable<Product>)ViewData["ListOfProduct"])
+                {
+                    if (item.Id == (int)ViewData["ProductId"])
+                    {
+                        @item.Name
+                        break;
+                    }
+                }
+            </h1>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <dl class="row">
+            <dt class="col-sm-2"><label asp-for="Id"></label></dt>
+            <dd class="col-sm-10">@Model.Id</dd>
+            <dt class="col-sm-2"><label asp-for="Price"></label></dt>
+            <dd class="col-sm-10">@Model.Price</dd>
+            <dt class="col-sm-2"><label asp-for="Color"></label></dt>
+            <dd class="col-sm-10">@Model.Color</dd>
+            <dt class="col-sm-2"><label asp-for="StartingDate"></label></dt>
+            <dd class="col-sm-10">@Model.StartingDate</dd>
+            <dt class="col-sm-2"><label asp-for="ClosingDate"></label></dt>
+            <dd class="col-sm-10">@Model.ClosingDate</dd>
+            <dt class="col-sm-2"><label asp-for="MadeBy"></label></dt>
+            <dd class="col-sm-10">@Model.MadeBy</dd>
+            <dt class="col-sm-2"><label asp-for="ProductId"></label></dt>
+            <dd class="col-sm-10">@Model.ProductId</dd>
+            <dt class="col-sm-2"><label asp-for="CreatedDate"></label></dt>
+            <dd class="col-sm-10">@Model.CreatedDate</dd>
+            <dt class="col-sm-2"><label asp-for="UpdatedDate"></label></dt>
+            <dd class="col-sm-10">@Model.UpdatedDate</dd>
+        </dl>
+    </table>
+</div>

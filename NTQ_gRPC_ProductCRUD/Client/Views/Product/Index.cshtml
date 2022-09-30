@@ -1,4 +1,5 @@
-﻿@model Service.Products
+﻿@using Service
+@model Service.Products
 
 <div class="conatainer p-3">
     <div class="row pt-4">
@@ -12,7 +13,7 @@
         </div>
     </div>
     <br /><br />
-    <table class="table table-bordered table-striped" style="width:100%">
+    <table class="table table-bordered table-striped" style="width:100%; text-align:center">
         <thead>
             <tr>
                 <th>
@@ -28,7 +29,7 @@
                     Active
                 </th>
                 <th>
-                    Category Id
+                    Category Name
                 </th>
                 <th>
                     CreatedDate
@@ -55,8 +56,15 @@
                         @obj.Active
                     </td>
                     <td>
-                        @obj.CategoryId
-                    </td>
+                        @*@obj.CategoryId*@
+                        @foreach (var item in (IEnumerable<Category>)ViewData["DisplayCategory"])
+                        {
+                            if(obj.CategoryId == item.Id)
+                            {
+                                @item.Name
+                            }
+                        }
+                     </td>
                     <td>
                         @obj.CreatedDate.ToDateTime().ToString("dd/MM/yyyy")
                     </td>

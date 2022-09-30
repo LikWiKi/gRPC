@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "vDQRUqXYfbywKwAYHPj+7fydyayCc0ZEMv66+r+lmwFArlavokQX7SOyoAUe574+b5JC4eZjMAOy1xcgEwnDBw==",
+  "dgSpecHash": "FZvnWl26ML+P7LC0ZoowSk1weoAlyK2/2tjZAzBj7SBZ5HLuAeH7Ey2H+OlgSVcqymsvVTaOV3Xa8fRQ7qwQ1Q==",
   "success": true,
-  "projectFilePath": "E:\\NTQ\\Mock_gRPC-main\\NTQ_gRPC_ProductCRUD\\Client\\Client.csproj",
+  "projectFilePath": "Z:\\Git\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Linh master\\.nuget\\packages\\google.protobuf\\3.21.5\\google.protobuf.3.21.5.nupkg.sha512",
-    "C:\\Users\\Linh master\\.nuget\\packages\\grpc.core.api\\2.48.0\\grpc.core.api.2.48.0.nupkg.sha512",
-    "C:\\Users\\Linh master\\.nuget\\packages\\grpc.net.client\\2.48.0\\grpc.net.client.2.48.0.nupkg.sha512",
-    "C:\\Users\\Linh master\\.nuget\\packages\\grpc.net.common\\2.48.0\\grpc.net.common.2.48.0.nupkg.sha512",
-    "C:\\Users\\Linh master\\.nuget\\packages\\grpc.tools\\2.48.1\\grpc.tools.2.48.1.nupkg.sha512",
-    "C:\\Users\\Linh master\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.3\\microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
-    "C:\\Users\\Linh master\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\google.protobuf\\3.21.5\\google.protobuf.3.21.5.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\grpc.core.api\\2.48.0\\grpc.core.api.2.48.0.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\grpc.net.client\\2.48.0\\grpc.net.client.2.48.0.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\grpc.net.common\\2.48.0\\grpc.net.common.2.48.0.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\grpc.tools\\2.48.1\\grpc.tools.2.48.1.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.3\\microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }

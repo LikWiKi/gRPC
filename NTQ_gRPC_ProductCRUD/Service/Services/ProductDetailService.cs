@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using Microsoft.AspNetCore.Mvc;
 using Service.Repository.ProductDetail;
 namespace Service.Services
 {
@@ -69,20 +70,27 @@ namespace Service.Services
 
         public override Task<ProductDetail> GetById(ProductDetailById requestData, ServerCallContext context)
         {
-            var data = _productDetailRepository.GetById(requestData.Id);
-            ProductDetail emp = new ProductDetail()
+            try
             {
-                Id = data.Id,
-                Price = data.Price,
-                Color = data.Color,
-                StartingDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)data.StartingDate, DateTimeKind.Utc)),
-                ClosingDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)data.ClosingDate, DateTimeKind.Utc)),
-                MadeBy = data.MadeBy,
-                ProductId = data.ProductId,
-                CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(data.CreatedDate, DateTimeKind.Utc)),
-                UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(data.UpdatedDate, DateTimeKind.Utc))
-            };
-            return Task.FromResult(emp);
+                var data = _productDetailRepository.GetById(requestData.Id);
+                ProductDetail emp = new ProductDetail()
+                {
+                    Id = data.Id,
+                    Price = data.Price,
+                    Color = data.Color,
+                    StartingDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)data.StartingDate, DateTimeKind.Utc)),
+                    ClosingDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)data.ClosingDate, DateTimeKind.Utc)),
+                    MadeBy = data.MadeBy,
+                    ProductId = data.ProductId,
+                    CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(data.CreatedDate, DateTimeKind.Utc)),
+                    UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(data.UpdatedDate, DateTimeKind.Utc))
+                };
+                return Task.FromResult(emp);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Product detail not found");
+            }
         }
 
         public override Task<Empty> Delete(ProductDetailById requestData, ServerCallContext context)

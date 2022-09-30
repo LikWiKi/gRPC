@@ -1,9 +1,19 @@
-﻿@model Service.Products
+﻿@using Service
+@model Service.Products
 
 <div class="conatainer p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h1 class="text-primary">Product List</h1>
+            <h1 class="text-primary">List product of 
+                @foreach (var item in (IEnumerable<Category>)ViewData["Categories"])
+                {
+                    if (item.Id == (int)ViewData["CategoryId"])
+                    {
+                        @item.Name
+                        break;
+                    }
+                }
+            </h1>
         </div>
         <div class="text-end" style="margin-bottom: -50px">
             <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
@@ -26,9 +36,6 @@
                 </th>
                 <th>
                     Active
-                </th>
-                <th>
-                    Category Id
                 </th>
                 <th>
                     CreatedDate
@@ -55,9 +62,6 @@
                         @obj.Active
                     </td>
                     <td>
-                        @obj.CategoryId
-                    </td>
-                    <td>
                         @obj.CreatedDate.ToDateTime().ToString("dd/MM/yyyy")
                     </td>
                     <td>
@@ -66,7 +70,7 @@
                     <td>
                         <a asp-controller="Product" asp-action="Edit" class="btn btn-primary" asp-route-id="@obj.Id">Edit</a>
                         <a asp-controller="Product" asp-action="Delete" class="btn btn-primary" asp-route-id="@obj.Id">Delete</a>
-                        <a asp-controller="Product" asp-action="Detail" class="btn btn-primary" asp-route-id="@obj.Id">Detail</a>
+                        @*<a asp-controller="Product" asp-action="Detail" class="btn btn-primary" asp-route-id="@obj.Id">Detail</a>*@
                     </td>
                 </tr>
             }
