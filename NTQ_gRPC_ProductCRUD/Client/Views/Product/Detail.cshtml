@@ -1,15 +1,18 @@
 ﻿@using Service
-@model Service.ProductDetail
+@model Service.ProductDetails
 
+@{
+    var product = (Product)ViewData["Product"];
+}
 <div class="conatainer p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h1 class="text-primary">
-                @foreach (var item in (IEnumerable<Product>)ViewData["ListOfProduct"])
+            <h1 class="text-primary">Product detail of 
+                @foreach (var item in (IEnumerable<Product>)ViewData["Products"])
                 {
                     if (item.Id == (int)ViewData["ProductId"])
                     {
-                        @item.Name
+                        @product.Name
                         break;
                     }
                 }
@@ -19,24 +22,91 @@
     <br /><br />
     <table class="table table-bordered table-striped" style="width:100%">
         <dl class="row">
-            <dt class="col-sm-2"><label asp-for="Id"></label></dt>
-            <dd class="col-sm-10">@Model.Id</dd>
-            <dt class="col-sm-2"><label asp-for="Price"></label></dt>
-            <dd class="col-sm-10">@Model.Price</dd>
-            <dt class="col-sm-2"><label asp-for="Color"></label></dt>
-            <dd class="col-sm-10">@Model.Color</dd>
-            <dt class="col-sm-2"><label asp-for="StartingDate"></label></dt>
-            <dd class="col-sm-10">@Model.StartingDate</dd>
-            <dt class="col-sm-2"><label asp-for="ClosingDate"></label></dt>
-            <dd class="col-sm-10">@Model.ClosingDate</dd>
-            <dt class="col-sm-2"><label asp-for="MadeBy"></label></dt>
-            <dd class="col-sm-10">@Model.MadeBy</dd>
-            <dt class="col-sm-2"><label asp-for="ProductId"></label></dt>
-            <dd class="col-sm-10">@Model.ProductId</dd>
-            <dt class="col-sm-2"><label asp-for="CreatedDate"></label></dt>
-            <dd class="col-sm-10">@Model.CreatedDate</dd>
-            <dt class="col-sm-2"><label asp-for="UpdatedDate"></label></dt>
-            <dd class="col-sm-10">@Model.UpdatedDate</dd>
+            <dt class="col-sm-2">Id</dt>
+            <dd class="col-sm-10">@product.Id</dd>
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@product.Name</dd>
+            <dt class="col-sm-2">Tag name</dt>
+            <dd class="col-sm-10">@product.TagName</dd>
+            <dt class="col-sm-2">Active</dt>
+            <dd class="col-sm-10">@product.Active</dd>
+            <dt class="col-sm-2">Category Id</dt>
+            <dd class="col-sm-10">@product.CategoryId</dd>
+            <dt class="col-sm-2">CreatedDate</dt>
+            <dd class="col-sm-10">@product.CreatedDate.ToDateTime().ToString("dd/MM/yyyy")</dd>
+            <dt class="col-sm-2">UpdatedDate</dt>
+            <dd class="col-sm-10">@product.UpdatedDate.ToDateTime().ToString("dd/MM/yyyy")</dd>
         </dl>
+    </table>
+    <table class="table table-bordered table-striped" style="width:100%; text-align:center">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Color
+                </th>
+                <th>
+                    StartingDate
+                </th>
+                <th>
+                    ClosingDate
+                </th>
+                <th>
+                    MadeBy
+                </th>
+                <th>
+                    ProductId
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+                <th>
+                    UpdatedDate
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @obj.Id
+                    </td>
+                    <td>
+                        @obj.Price
+                    </td>
+                    <td>
+                        @obj.Color
+                    </td>
+                    <td>
+                        @obj.StartingDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @obj.ClosingDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @obj.MadeBy
+                    </td>
+                    <td>
+                        @obj.ProductId
+                    </td>
+                    <td>
+                        @obj.CreatedDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @obj.UpdatedDate.ToDateTime().ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        <a asp-controller="ProductDetail" asp-action="Edit" class="btn btn-primary" asp-route-id="@obj.Id">Edit</a>
+                        <a asp-controller="ProductDetail" asp-action="Delete" class="btn btn-primary" asp-route-id="@obj.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>

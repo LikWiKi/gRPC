@@ -1,14 +1,17 @@
 ﻿using Grpc.Core;
 using Service.Repository.Product;
+using Service.Repository.ProductDetail;
 
 namespace Service.Services
 {
     public class ProductService : ProductCRUD.ProductCRUDBase
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly IProductDetailRepository _productDetailRepository;
+        public ProductService(IProductRepository productRepository, IProductDetailRepository productDetailRepository)
         {
             _productRepository = productRepository;
+            _productDetailRepository = productDetailRepository;
         }
 
         public override Task<Products> GetAll(Empty requestData, ServerCallContext context)
@@ -81,6 +84,26 @@ namespace Service.Services
         {
             _productRepository.Delete(requestData.Id);
             return Task.FromResult(new Empty());
+        }
+
+        public override Task<ProductDetails> GetAllProductDetailByProductId(ProductById requestData, ServerCallContext context)
+        {
+            var listOfProductDetail = _productDetailRepository.GetAll().Where(pr => pr.ProductId == requestData.Id)
+                .Select(p => new ProductDetail()
+                {
+                    Id = p.Id,
+                    Price = p.Price,
+                    Color = p.Color,
+                    StartingDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)p.StartingDate, DateTimeKind.Utc)),
+                    ClosingDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)p.ClosingDate, DateTimeKind.Utc)),
+                    MadeBy = p.MadeBy,
+                    ProductId = p.ProductId,
+                    CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(p.CreatedDate, DateTimeKind.Utc)),
+                    UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(p.UpdatedDate, DateTimeKind.Utc))
+                });
+            ProductDetails productDetails = new ProductDetails();
+            productDetails.Items.AddRange(listOfProductDetail.ToArray());
+            return Task.FromResult(productDetails);
         }
     }
 }

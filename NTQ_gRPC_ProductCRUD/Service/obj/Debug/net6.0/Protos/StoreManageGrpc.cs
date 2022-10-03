@@ -233,6 +233,8 @@ namespace Service {
     static readonly grpc::Marshaller<global::Service.ProductById> __Marshaller_storeCRUD_ProductById = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.ProductById.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.Product> __Marshaller_storeCRUD_Product = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Product.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.ProductDetails> __Marshaller_storeCRUD_ProductDetails = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.ProductDetails.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Service.Empty, global::Service.Products> __Method_GetAll = new grpc::Method<global::Service.Empty, global::Service.Products>(
@@ -274,6 +276,14 @@ namespace Service {
         __Marshaller_storeCRUD_ProductById,
         __Marshaller_storeCRUD_Empty);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Service.ProductById, global::Service.ProductDetails> __Method_GetAllProductDetailByProductId = new grpc::Method<global::Service.ProductById, global::Service.ProductDetails>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllProductDetailByProductId",
+        __Marshaller_storeCRUD_ProductById,
+        __Marshaller_storeCRUD_ProductDetails);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -314,6 +324,12 @@ namespace Service {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Service.ProductDetails> GetAllProductDetailByProductId(global::Service.ProductById request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -326,7 +342,8 @@ namespace Service {
           .AddMethod(__Method_GetById, serviceImpl.GetById)
           .AddMethod(__Method_Create, serviceImpl.Create)
           .AddMethod(__Method_Update, serviceImpl.Update)
-          .AddMethod(__Method_Delete, serviceImpl.Delete).Build();
+          .AddMethod(__Method_Delete, serviceImpl.Delete)
+          .AddMethod(__Method_GetAllProductDetailByProductId, serviceImpl.GetAllProductDetailByProductId).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -341,6 +358,7 @@ namespace Service {
       serviceBinder.AddMethod(__Method_Create, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Product, global::Service.Empty>(serviceImpl.Create));
       serviceBinder.AddMethod(__Method_Update, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Product, global::Service.Empty>(serviceImpl.Update));
       serviceBinder.AddMethod(__Method_Delete, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.ProductById, global::Service.Empty>(serviceImpl.Delete));
+      serviceBinder.AddMethod(__Method_GetAllProductDetailByProductId, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.ProductById, global::Service.ProductDetails>(serviceImpl.GetAllProductDetailByProductId));
     }
 
   }

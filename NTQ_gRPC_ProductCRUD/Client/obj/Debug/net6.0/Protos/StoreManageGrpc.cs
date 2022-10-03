@@ -317,6 +317,8 @@ namespace Service {
     static readonly grpc::Marshaller<global::Service.ProductById> __Marshaller_storeCRUD_ProductById = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.ProductById.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.Product> __Marshaller_storeCRUD_Product = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Product.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.ProductDetails> __Marshaller_storeCRUD_ProductDetails = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.ProductDetails.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Service.Empty, global::Service.Products> __Method_GetAll = new grpc::Method<global::Service.Empty, global::Service.Products>(
@@ -357,6 +359,14 @@ namespace Service {
         "Delete",
         __Marshaller_storeCRUD_ProductById,
         __Marshaller_storeCRUD_Empty);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Service.ProductById, global::Service.ProductDetails> __Method_GetAllProductDetailByProductId = new grpc::Method<global::Service.ProductById, global::Service.ProductDetails>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllProductDetailByProductId",
+        __Marshaller_storeCRUD_ProductById,
+        __Marshaller_storeCRUD_ProductDetails);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -490,6 +500,26 @@ namespace Service {
       public virtual grpc::AsyncUnaryCall<global::Service.Empty> DeleteAsync(global::Service.ProductById request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Delete, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Service.ProductDetails GetAllProductDetailByProductId(global::Service.ProductById request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllProductDetailByProductId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Service.ProductDetails GetAllProductDetailByProductId(global::Service.ProductById request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAllProductDetailByProductId, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Service.ProductDetails> GetAllProductDetailByProductIdAsync(global::Service.ProductById request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllProductDetailByProductIdAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Service.ProductDetails> GetAllProductDetailByProductIdAsync(global::Service.ProductById request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAllProductDetailByProductId, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

@@ -1,6 +1,13 @@
 ﻿@using Service
 @model Service.Products
 
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 2000);
+    </script>
+}
 <div class="conatainer p-3">
     <div class="row pt-4">
         <div class="col-6">
@@ -13,6 +20,14 @@
         </div>
     </div>
     <br /><br />
+    <div class="row">
+        @if (ViewBag.SuccessMsg != null)
+        {
+            <div id="msgAlert" class="alert alert-success" role="alert">
+                @ViewBag.SuccessMsg
+            </div>
+        }
+    </div>
     <table class="table table-bordered table-striped" style="width:100%; text-align:center">
         <thead>
             <tr>

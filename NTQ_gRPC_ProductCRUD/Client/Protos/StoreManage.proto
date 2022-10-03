@@ -42,6 +42,7 @@ service ProductCRUD{
 	rpc Create(Product) returns (Empty);
 	rpc Update(Product) returns (Empty);
 	rpc Delete(ProductById) returns (Empty);
+	rpc GetAllProductDetailByProductId(ProductById) returns (ProductDetails);
 }
 
 message Product{

@@ -15,6 +15,11 @@ namespace Client.Controllers
             var products = clientProduct.GetAll(new Empty());
             var listOfCategory = clientCategory.GetAll(new Empty()).Items;
             ViewData["DisplayCategory"] = listOfCategory;
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
             return View(products);
         }
 
@@ -48,6 +53,9 @@ namespace Client.Controllers
                 CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(createDate, DateTimeKind.Utc)),
                 UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(updateDate, DateTimeKind.Utc))
             });
+
+            TempData["result"] = "Add product success!!!";
+
             return RedirectToAction("Index");
         }
 
@@ -71,12 +79,21 @@ namespace Client.Controllers
         [HttpPost]
         public IActionResult Edit(Product product, DateTime dobCreate, DateTime dobUpdate)
         {
-            var channel = GrpcChannel.ForAddress("https://localhost:7092");
-            var client = new ProductCRUD.ProductCRUDClient(channel);
+            try
+            {
+                var channel = GrpcChannel.ForAddress("https://localhost:7092");
+                var client = new ProductCRUD.ProductCRUDClient(channel);
 
-            product.CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(dobCreate, DateTimeKind.Utc));
-            product.UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(dobUpdate, DateTimeKind.Utc));
-            client.Update(product);
+                product.CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(dobCreate, DateTimeKind.Utc));
+                product.UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(dobUpdate, DateTimeKind.Utc));
+                client.Update(product);
+            }
+            catch (Exception)
+            {
+                TempData["result"] = "Edit product failed. Please try again!!!";
+                return View(product);
+            }
+            TempData["result"] = "Edit product success!!!";
             return RedirectToAction("Index");
         }
 
@@ -86,9 +103,9 @@ namespace Client.Controllers
             var channel = GrpcChannel.ForAddress("https://localhost:7092");
             var client = new ProductCRUD.ProductCRUDClient(channel);
             var product = new ProductById();
-            product.Id = Convert.ToInt32(id)
-;
+            product.Id = Convert.ToInt32(id);
             client.Delete(product);
+            TempData["result"] = "Delete product success!!!";
             return RedirectToAction("Index");
         }
 
@@ -96,28 +113,27 @@ namespace Client.Controllers
         public IActionResult Detail(string id)
         {
             var channel = GrpcChannel.ForAddress("https://localhost:7092");
-            var clientProductDetail = new ProductDetailCRUD.ProductDetailCRUDClient(channel);
             var clientProduct = new ProductCRUD.ProductCRUDClient(channel);
 
-            ViewData["ListOfProduct"] = clientProduct.GetAll(new Empty()).Items;
+            var productDetail = new ProductById();
+            productDetail.Id = Convert.ToInt32(id);
+            var listOfProductDetail = clientProduct.GetAllProductDetailByProductId(productDetail);
+            var listOfProduct = clientProduct.GetAll(new Empty { }).Items;
+
+            var findById = new ProductById();
+            findById.Id = Convert.ToInt32(id);
+            var product = clientProduct.GetById(findById);
+
+            if (listOfProductDetail.Items.Count == 0)
+            {
+                TempData["result"] = "No product detail in product!!!";
+                return RedirectToAction("Index");
+            }
+            ViewData["Product"] = product;
+            ViewData["Products"] = listOfProduct;
             ViewData["ProductId"] = int.Parse(id);
 
-            var findById= new ProductDetailById();
-            //findById.Id = Convert.ToInt32(id);
-
-            var listOfProductDetail = clientProductDetail.GetAll(new Empty()).Items;
-            foreach(var item in listOfProductDetail)
-            {
-                if(item.ProductId == int.Parse(id))
-                {
-                    findById.Id = item.Id;
-                }
-            }
-            var productDetail = clientProductDetail.GetById(findById);
-            if (productDetail == null)
-                return NotFound();
-
-            return View(productDetail);
+            return View(listOfProductDetail);
         }
     }
 }
