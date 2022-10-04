@@ -1,5 +1,7 @@
 ﻿using Grpc.Core;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Service.Exceptions;
 using Service.Models;
 using Service.Repository.Category;
 using Service.Repository.Product;
@@ -34,6 +36,36 @@ namespace Service.Services
             return Task.FromResult(responseData);
         }
 
+        public override Task<PageResult> GetPaging(PagingRequest requestData, ServerCallContext context)
+        {
+            //Categories pageData = new Categories(); 
+            var categoryPaging = _categoryRepository.GetAll()
+                                    .Skip((requestData.PageIndex - 1) * requestData.PageSize)
+                                    .Take(requestData.PageSize)
+                                    .Select(p => new Category()
+                                    {
+                                        Id = p.Id,
+                                        Name = p.Name,
+                                        TagName = p.TagName,
+                                        Active = (bool)p.Active,
+                                        CreatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(p.CreatedDate, DateTimeKind.Utc)),
+                                        UpdatedDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(p.UpdatedDate, DateTimeKind.Utc))
+                                    }).ToArray();
+
+            int totalRecord = _categoryRepository.GetAll().Count();
+            var pageResult = new PageResult()
+            {
+                TotalRecords = totalRecord,
+                PageSize = requestData.PageSize,
+                PageIndex = requestData.PageIndex,
+                PageCount = (int)Math.Ceiling((double)totalRecord / (requestData.PageSize))
+            };
+            //pageData.Items.AddRange(categoryPaging);
+            //var p = pageResult.ListPaging.Items;
+            pageResult.ListPaging.AddRange(categoryPaging);
+            return Task.FromResult(pageResult);
+        }
+
 
         public override Task<Empty> Create(Category requestData, ServerCallContext context)
         {
@@ -66,6 +98,10 @@ namespace Service.Services
         public override Task<Category> GetById(CategoryById requestData, ServerCallContext context)
         {
             var data = _categoryRepository.GetById(requestData.Id);
+            if(data == null)
+            {
+                throw new gRPCException($"Can not find category {requestData.Id}");
+            }
             Category emp = new Category()
             {
                 Id = data.Id,

@@ -1,4 +1,5 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -91,7 +92,7 @@ namespace Client.Controllers
             catch (Exception)
             {
                 TempData["result"] = "Edit product failed. Please try again!!!";
-                return View(product);
+                return RedirectToAction("Index");
             }
             TempData["result"] = "Edit product success!!!";
             return RedirectToAction("Index");

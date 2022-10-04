@@ -53,6 +53,10 @@ namespace Service {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.Categories> __Marshaller_storeCRUD_Categories = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Categories.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.PagingRequest> __Marshaller_storeCRUD_PagingRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.PagingRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.PageResult> __Marshaller_storeCRUD_PageResult = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.PageResult.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.CategoryById> __Marshaller_storeCRUD_CategoryById = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.CategoryById.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.Category> __Marshaller_storeCRUD_Category = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Category.Parser));
@@ -66,6 +70,14 @@ namespace Service {
         "GetAll",
         __Marshaller_storeCRUD_Empty,
         __Marshaller_storeCRUD_Categories);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Service.PagingRequest, global::Service.PageResult> __Method_GetPaging = new grpc::Method<global::Service.PagingRequest, global::Service.PageResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetPaging",
+        __Marshaller_storeCRUD_PagingRequest,
+        __Marshaller_storeCRUD_PageResult);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Service.CategoryById, global::Service.Category> __Method_GetById = new grpc::Method<global::Service.CategoryById, global::Service.Category>(
@@ -124,6 +136,12 @@ namespace Service {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Service.PageResult> GetPaging(global::Service.PagingRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Service.Category> GetById(global::Service.CategoryById request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -162,6 +180,7 @@ namespace Service {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_GetAll, serviceImpl.GetAll)
+          .AddMethod(__Method_GetPaging, serviceImpl.GetPaging)
           .AddMethod(__Method_GetById, serviceImpl.GetById)
           .AddMethod(__Method_Create, serviceImpl.Create)
           .AddMethod(__Method_Update, serviceImpl.Update)
@@ -177,6 +196,7 @@ namespace Service {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CategoryCRUDBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_GetAll, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Empty, global::Service.Categories>(serviceImpl.GetAll));
+      serviceBinder.AddMethod(__Method_GetPaging, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.PagingRequest, global::Service.PageResult>(serviceImpl.GetPaging));
       serviceBinder.AddMethod(__Method_GetById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.CategoryById, global::Service.Category>(serviceImpl.GetById));
       serviceBinder.AddMethod(__Method_Create, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Category, global::Service.Empty>(serviceImpl.Create));
       serviceBinder.AddMethod(__Method_Update, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.Category, global::Service.Empty>(serviceImpl.Update));

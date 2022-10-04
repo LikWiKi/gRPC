@@ -2,21 +2,53 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Service;
+using System.Xml.Linq;
+using System;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using PageResult = Service.PageResult;
 
 namespace Client.Controllers
 {
     public class CategoryController : Controller
     {
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    var channel = GrpcChannel.ForAddress("https://localhost:7092");
+        //    var client = new CategoryCRUD.CategoryCRUDClient(channel);
+        //    var categories = client.GetAll(new Empty());
+        //    if (TempData["result"] != null)
+        //    {
+        //        ViewBag.SuccessMsg = TempData["result"];
+        //    }
+        //    return View(categories);
+        //}
+
+        public IActionResult Index(int pageSize = 3, int pageIndex = 1)
         {
             var channel = GrpcChannel.ForAddress("https://localhost:7092");
             var client = new CategoryCRUD.CategoryCRUDClient(channel);
-            var categories = client.GetAll(new Empty());
+
+            var paging = new PagingRequest()
+            {
+                PageSize = pageSize,
+                PageIndex = pageIndex
+            };
+            var categories = client.GetPaging(paging).ListPaging;
+            int total = client.GetAll(new Empty()).Items.Count();
+            PageResult result = new PageResult
+            {
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                TotalRecords = total,
+                PageCount = (int)Math.Ceiling((double)total / pageSize)
+            };
+            result.ListPaging.AddRange(categories.ToArray());
+
             if (TempData["result"] != null)
             {
                 ViewBag.SuccessMsg = TempData["result"];
             }
-            return View(categories);
+            return View(result);
         }
 
         [HttpGet]

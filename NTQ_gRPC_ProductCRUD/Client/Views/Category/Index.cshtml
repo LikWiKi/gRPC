@@ -1,4 +1,4 @@
-﻿@model Service.Categories
+﻿@model Service.PageResult
 
 @section Scripts{
     <script>
@@ -51,7 +51,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model.Items)
+            @foreach (var obj in Model.ListPaging)
             {
                 <tr>
                     <td>
@@ -81,4 +81,5 @@
             }
         </tbody>
     </table>
+    @await Component.InvokeAsync("Pager", Model)
 </div>

@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using Service.Exceptions;
 using Service.Repository.Product;
 using Service.Repository.ProductDetail;
 
@@ -67,6 +68,10 @@ namespace Service.Services
         public override Task<Product> GetById(ProductById requestData, ServerCallContext context)
         {
             var data = _productRepository.GetById(requestData.Id);
+            if(data == null)
+            {
+                throw new gRPCException($"Can not find product {requestData.Id}");
+            }
             Product emp = new Product()
             {
                 Id = data.Id,

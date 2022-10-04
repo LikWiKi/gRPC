@@ -9,6 +9,7 @@ package storeCRUD;
 //CATEGORY
 service CategoryCRUD{
 	rpc GetAll(Empty) returns (Categories);
+	rpc GetPaging(PagingRequest) returns (PageResult);
 	rpc GetById(CategoryById) returns (Category);
 	rpc Create(Category) returns (Empty);
 	rpc Update(Category) returns (Empty);
@@ -33,6 +34,19 @@ message Categories{
 
 message CategoryById{
 	int32 id = 1;
+}
+
+message PagingRequest{
+	int32 pageIndex = 1;
+	int32 pageSize = 2;
+}
+
+message PageResult{
+	int32 pageIndex = 1;
+	int32 pageSize = 2;
+	int32 TotalRecords = 3;
+	int32 PageCount = 4;
+	repeated Category listPaging = 5;
 }
 
 //PRODUCT
