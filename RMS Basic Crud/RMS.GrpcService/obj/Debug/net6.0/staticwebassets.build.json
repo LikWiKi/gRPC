@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "8zV1wEp3vr5x9ecHDHHrPFbpIvbPykmfThC51t7ynXI=",
+  "Source": "RMS.GrpcService",
+  "BasePath": "_content/RMS.GrpcService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

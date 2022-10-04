@@ -1,3 +1,3 @@
 obj\Debug\net6.0\Protos/StoreManage.cs \
-obj\Debug\net6.0\Protos/StoreManageGrpc.cs: C:/Users/linh.nguyen22/.nuget/packages/grpc.tools/2.40.0/build/native/include/google/protobuf/timestamp.proto\
+obj\Debug\net6.0\Protos/StoreManageGrpc.cs: C:/Users/Linh master/.nuget/packages/grpc.tools/2.40.0/build/native/include/google/protobuf/timestamp.proto\
  Protos/StoreManage.proto

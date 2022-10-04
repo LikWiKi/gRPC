@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option csharp_namespace = "RMS.Web.Protos";
+
+package user;
+
+service PUser {
+	rpc InsertUser (UserModel) returns (Reply);
+	rpc UpdateUser (UserModel) returns (Reply);
+	rpc DeleteUser (UserLookupModel) returns (Reply);
+	rpc GetUserById (UserLookupModel) returns (UserModel);
+	rpc GetUserDocById (UserDocLookupModel) returns (UserDocModel);
+	rpc GetAllUsers (Empty) returns (UserList);
+}
+
+message Empty {}
+
+message Reply {
+	string result = 1;
+	bool isOk = 2;
+}
+
+message UserModel {
+	string UserId = 1;
+	string Name = 2;
+	string Email = 3;
+	string PhoneNumber = 4;
+	bytes ProfilePic = 5;
+	string Address = 6;
+	string CreatedDate = 7;
+	string UpdatedDate = 8;
+	Reply Error = 9;
+	repeated UserDocModel UserDocs = 10;
+}
+
+message UserLookupModel {
+	string UserId = 1;
+}
+
+message UserDocLookupModel {
+	string UserDocId = 1;
+}
+
+message UserList {
+	repeated UserModel items = 1;
+	Reply Error = 2;
+}
+
+// Documents
+
+message UserDocModel {
+	string UserDocId = 1;
+	string UserId = 2 ;
+	bytes File = 3;
+	string FileType = 4;
+	string FileName = 5;
+	Reply Error = 6;
+}

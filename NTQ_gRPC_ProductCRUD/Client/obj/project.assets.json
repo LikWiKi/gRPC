@@ -5,14 +5,10 @@
       "Google.Protobuf/3.21.5": {
         "type": "package",
         "compile": {
-          "lib/net5.0/Google.Protobuf.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net5.0/Google.Protobuf.dll": {}
         },
         "runtime": {
-          "lib/net5.0/Google.Protobuf.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net5.0/Google.Protobuf.dll": {}
         }
       },
       "Grpc.Core.Api/2.48.0": {
@@ -21,14 +17,10 @@
           "System.Memory": "4.5.3"
         },
         "compile": {
-          "lib/netstandard2.1/Grpc.Core.Api.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netstandard2.1/Grpc.Core.Api.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/Grpc.Core.Api.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netstandard2.1/Grpc.Core.Api.dll": {}
         }
       },
       "Grpc.Net.Client/2.48.0": {
@@ -38,14 +30,10 @@
           "Microsoft.Extensions.Logging.Abstractions": "3.0.3"
         },
         "compile": {
-          "lib/net6.0/Grpc.Net.Client.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net6.0/Grpc.Net.Client.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Grpc.Net.Client.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net6.0/Grpc.Net.Client.dll": {}
         }
       },
       "Grpc.Net.Common/2.48.0": {
@@ -54,14 +42,10 @@
           "Grpc.Core.Api": "2.48.0"
         },
         "compile": {
-          "lib/net6.0/Grpc.Net.Common.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net6.0/Grpc.Net.Common.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Grpc.Net.Common.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net6.0/Grpc.Net.Common.dll": {}
         }
       },
       "Grpc.Tools/2.48.1": {
@@ -74,14 +58,10 @@
       "Microsoft.Extensions.Logging.Abstractions/3.0.3": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
       "System.Memory/4.5.3": {
@@ -286,24 +266,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Linh master\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Git\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\Client.csproj",
+      "projectUniqueName": "E:\\NTQ\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "Z:\\Git\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\Client.csproj",
-      "packagesPath": "C:\\Users\\linh.nguyen22\\.nuget\\packages\\",
-      "outputPath": "Z:\\Git\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\obj\\",
+      "projectPath": "E:\\NTQ\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\Client.csproj",
+      "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
+      "outputPath": "E:\\NTQ\\gRPC\\NTQ_gRPC_ProductCRUD\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\linh.nguyen22\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Linh master\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -350,8 +329,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -363,7 +341,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
