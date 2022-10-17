@@ -39,16 +39,3 @@ FOREIGN KEY (ProductId) REFERENCES Product(Id)
 );
 </pre>
 
-## Database
-URL: NTQTRAINING.mssql.somee.com
-USER: gianglt263_SQLLogin_1
-PASS: o4b6j3rs7g
-DatabaseName: NTQTRAINING
-
-<pre>Connection string:
-workstation id=NTQTRAINING.mssql.somee.com;packet size=4096;user id=gianglt263_SQLLogin_1;pwd=o4b6j3rs7g;data source=NTQTRAINING.mssql.somee.com;persist security info=False;initial catalog=NTQTRAINING
-</pre>
-
-## Lưu ý:
-Có thể dùng tool DBeaver để connect nhé
-Tạo ADO Model => Provider: chọn Other
